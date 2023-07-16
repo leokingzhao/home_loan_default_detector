@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+</head>
+<body>
+ <div class="login">
+    <h1>Flower Class Prediction</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}" method="post">
+        <label for="REGION_POPULATION_RELATIVE">REGION_POPULATION_RELATIVE</label>
+        <input type="text" name="SREGION_POPULATION_RELATIVE" id="REGION_POPULATION_RELATIVE" placeholder="REGION_POPULATION_RELATIVE" required="required" />
+        <br>
+        <label for="EXT_SOURCE_3">Sepal EXT_SOURCE_3</label>
+        <input type="text" name="EXT_SOURCE_3" id="EXT_SOURCE_3" placeholder="EXT_SOURCE_3" required="required" />
+        <br>
+        <label for="DAYS_LAST_PHONE_CHANGE">DAYS_LAST_PHONE_CHANGE</label>
+        <input type="text" name="DAYS_LAST_PHONE_CHANGE" id="DAYS_LAST_PHONE_CHANGE" placeholder="DAYS_LAST_PHONE_CHANGE" required="required" />
+        <br>
+        
+        <label for="NAME_CONTRACT_TYPE">NAME_CONTRACT_TYPE</label>
+        <select name="NAME_CONTRACT_TYPE" id="NAME_CONTRACT_TYPE" required="required">
+            <option value="Cash loans">Cash loans</option>
+            <option value="Revolving loans">Revolving loans</option>
+            <!-- Add more options here -->
+        </select>
+        <br>
+        <label for="CODE_GENDER">CODE_GENDER</label>
+        <select name="CODE_GENDER" id="CODE_GENDER" required="required">
+            <option value="F">Female</option>
+            <option value="M">Male</option>
+            <option value="XNA">XNA</option>
+            <!-- Add more options here -->
+        </select>
+        <br>'
+        <label for="NAME_INCOME_TYPE">NAME_INCOME_TYPE</label>'
+        <select name="NAME_INCOME_TYPE" id="NAME_INCOME_TYPE" required="required">
+            <option value="Commercial associate">Commercial associate</option>
+            <option value="Pensioner">Pensioner</option>
+            <option value="State servant">State servant</option>
+            <option value="Businessman">Businessman</option>
+            <option value="Unemployed">Unemployed</option>
+            <option value="Maternity leave">Maternity leave</option>
+            <!-- Add more options here -->
+        </select>
+        <br>
+        <label for="FLAG_OWN_CAR">FLAG_OWN_CAR</label>
+        <select name="FLAG_OWN_CAR" id="FLAG_OWN_CAR" required="required">
+            <option value="Higher education">Higher education</option>
+            <option value="Secondary / secondary special">Secondary / secondary special</Nav></option>
+            <option value="Incomplete higher">Incomplete higher</Nav></option>
+            <option value="Lower secondary">Lower secondary</Nav></option>
+            <option value="Academic degree">Academic degree</Nav></option>
+            <!-- Add more options here -->
+        </select>
+        <br>
+        <label for="NAME_EDUCATION_TYPE">NAME_EDUCATION_TYPE</label>
+        <select name="NAME_EDUCATION_TYPE" id="NAME_EDUCATION_TYPE" required="required">
+            <option value="Y">Y</option>
+            <option value="N">N</Nav></option>
+          
+            <!-- Add more options here -->
+        </select>
+        <!-- Add more categorical features as needed -->
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+    <br>
+    <br>
+    {{ prediction_text }}
+ </div>
+</body>
+</html>
