@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+import joblib
 from PIL import Image
 # from streamlit_shap import st_shap
 import streamlit as st
@@ -85,79 +87,79 @@ df4 = df[['TARGET', 'FLAG_OWN_CAR']].value_counts().reset_index()
 df5 = df[['TARGET', 'NAME_INCOME_TYPE']].value_counts().reset_index()
 df6 = df[['TARGET', 'NAME_EDUCATION_TYPE']].value_counts().reset_index()
 
-
-with placeholder1.container():
-    f1, f2, f3, = st.columns(3)
-
-    with f1:
-        a11 = df[df['TARGET'] == 1]['EXT_SOURCE_2']
-        a10 = df[df['TARGET'] == 0]['EXT_SOURCE_2']
-        hist_data = [a11, a10]
-        # group_labels = ['Real', 'Fake']
-        fig = ff.create_distplot(hist_data, group_labels=['Default', 'real'])
-        fig.update_layout(title_text='EXT_SOURCE_2')
-        st.plotly_chart(fig, use_container_width=True)
-    with f2:
-        a21 = df[df['TARGET'] == 1]['EXT_SOURCE_3']
-        a20 = df[df['TARGET'] == 0]['EXT_SOURCE_3']
-        hist_data = [a21, a20]
-        # group_labels = []
-        fig = ff.create_distplot(hist_data, group_labels=['Default', 'real'])
-        fig.update_layout(title_text='EXT_SOURCE_3')
-        st.plotly_chart(fig, use_container_width=True)
-    with f3:
-        a31 = df[df['TARGET'] == 1]['DAYS_REGISTRATION']
-        a30 = df[df['TARGET'] == 0]['DAYS_REGISTRATION']
-        hist_data = [a31, a30]
-        # group_labels = ['Real', 'Fake']
-        fig = ff.create_distplot(hist_data, group_labels=['Default', 'real'])
-        fig.update_layout(title_text='DAYS_REGISTRATION')
-        st.plotly_chart(fig, use_container_width=True)
-
-with placeholder2.container():
-    f1, f2, f3 = st.columns(3)
-
-    with f1:
-        a41 = df[df['TARGET'] == 1]['DAYS_LAST_PHONE_CHANGE']
-        a40 = df[df['TARGET'] == 0]['DAYS_LAST_PHONE_CHANGE']
-        hist_data = [a41, a40]
-        # group_labels = ['Real', 'Fake']
-        fig = ff.create_distplot(hist_data, group_labels=['Default', 'real'])
-        fig.update_layout(title_text='DAYS_LAST_PHONE_CHANGE')
-        st.plotly_chart(fig, use_container_width=True)
-    with f2:
-        # fig = plt.figure()
-        fig = px.bar(df2, x='TARGET', y='NAME_CONTRACT_TYPE', color='NAME_CONTRACT_TYPE',
-                     color_continuous_scale=px.colors.qualitative.Plotly,
-                     title="CONTRACT_TYPE")
-        st.write(fig)
-    with f3:
-        fig = px.bar(df3, x='TARGET', y="CODE_GENDER", color="CODE_GENDER", title="GENDER")
-        st.write(fig)
-
-
-
-with placeholder3.container():
-    f1, f2, f3 = st.columns(3)
-
-    with f1:
-        # fig = plt.figure()
-        fig = px.bar(df4, x='TARGET', y='FLAG_OWN_CAR', color='FLAG_OWN_CAR',
-                     color_continuous_scale=px.colors.qualitative.Plotly,
-                     title="OWN_CAR")
-        st.write(fig)
-    with f2:
-        fig = px.bar(df5, x='TARGET', y="NAME_INCOME_TYPE", color="NAME_INCOME_TYPE",
-                     color_continuous_scale=px.colors.qualitative.Plotly,
-                     title="INCOME_TYPE")
-        st.write(fig)
-
-    with f3:
-        # fig = plt.figure()
-        fig = px.bar(df6, x='TARGET', y='NAME_EDUCATION_TYPE', color='NAME_EDUCATION_TYPE',
-                     color_continuous_scale=px.colors.qualitative.Plotly,
-                     title="EDUCATION_TYPE")
-        st.write(fig)
+#
+# with placeholder1.container():
+#     f1, f2, f3, = st.columns(3)
+#
+#     with f1:
+#         a11 = df[df['TARGET'] == 1]['EXT_SOURCE_2']
+#         a10 = df[df['TARGET'] == 0]['EXT_SOURCE_2']
+#         hist_data = [a11, a10]
+#         # group_labels = ['Real', 'Fake']
+#         fig = ff.create_distplot(hist_data, group_labels=['Default', 'real'])
+#         fig.update_layout(title_text='EXT_SOURCE_2')
+#         st.plotly_chart(fig, use_container_width=True)
+#     with f2:
+#         a21 = df[df['TARGET'] == 1]['EXT_SOURCE_3']
+#         a20 = df[df['TARGET'] == 0]['EXT_SOURCE_3']
+#         hist_data = [a21, a20]
+#         # group_labels = []
+#         fig = ff.create_distplot(hist_data, group_labels=['Default', 'real'])
+#         fig.update_layout(title_text='EXT_SOURCE_3')
+#         st.plotly_chart(fig, use_container_width=True)
+#     with f3:
+#         a31 = df[df['TARGET'] == 1]['DAYS_REGISTRATION']
+#         a30 = df[df['TARGET'] == 0]['DAYS_REGISTRATION']
+#         hist_data = [a31, a30]
+#         # group_labels = ['Real', 'Fake']
+#         fig = ff.create_distplot(hist_data, group_labels=['Default', 'real'])
+#         fig.update_layout(title_text='DAYS_REGISTRATION')
+#         st.plotly_chart(fig, use_container_width=True)
+#
+# with placeholder2.container():
+#     f1, f2, f3 = st.columns(3)
+#
+#     with f1:
+#         a41 = df[df['TARGET'] == 1]['DAYS_LAST_PHONE_CHANGE']
+#         a40 = df[df['TARGET'] == 0]['DAYS_LAST_PHONE_CHANGE']
+#         hist_data = [a41, a40]
+#         # group_labels = ['Real', 'Fake']
+#         fig = ff.create_distplot(hist_data, group_labels=['Default', 'real'])
+#         fig.update_layout(title_text='DAYS_LAST_PHONE_CHANGE')
+#         st.plotly_chart(fig, use_container_width=True)
+#     with f2:
+#         # fig = plt.figure()
+#         fig = px.bar(df2, x='TARGET', y='NAME_CONTRACT_TYPE', color='NAME_CONTRACT_TYPE',
+#                      color_continuous_scale=px.colors.qualitative.Plotly,
+#                      title="CONTRACT_TYPE")
+#         st.write(fig)
+#     with f3:
+#         fig = px.bar(df3, x='TARGET', y="CODE_GENDER", color="CODE_GENDER", title="GENDER")
+#         st.write(fig)
+#
+#
+#
+# with placeholder3.container():
+#     f1, f2, f3 = st.columns(3)
+#
+#     with f1:
+#         # fig = plt.figure()
+#         fig = px.bar(df4, x='TARGET', y='FLAG_OWN_CAR', color='FLAG_OWN_CAR',
+#                      color_continuous_scale=px.colors.qualitative.Plotly,
+#                      title="OWN_CAR")
+#         st.write(fig)
+#     with f2:
+#         fig = px.bar(df5, x='TARGET', y="NAME_INCOME_TYPE", color="NAME_INCOME_TYPE",
+#                      color_continuous_scale=px.colors.qualitative.Plotly,
+#                      title="INCOME_TYPE")
+#         st.write(fig)
+#
+#     with f3:
+#         # fig = plt.figure()
+#         fig = px.bar(df6, x='TARGET', y='NAME_EDUCATION_TYPE', color='NAME_EDUCATION_TYPE',
+#                      color_continuous_scale=px.colors.qualitative.Plotly,
+#                      title="EDUCATION_TYPE")
+#         st.write(fig)
 
 st.title('SHAP Value')
 image1 = Image.open('/Users/zio/PycharmProjects/HomeLoanDefaultDetector/shap_plot.png')
