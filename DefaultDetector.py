@@ -162,9 +162,9 @@ df6 = df[['TARGET', 'NAME_EDUCATION_TYPE']].value_counts().reset_index()
 #         st.write(fig)
 
 st.title('SHAP Value')
-image1 = Image.open('/Users/zio/PycharmProjects/HomeLoanDefaultDetector/shap_plot.png')
-shapdatadf = pd.read_csv(r'/Users/zio/PycharmProjects/HomeLoanDefaultDetector/shapdatadf.csv').drop('Unnamed: 0',axis=1)
-shapvaluedf = pd.read_csv(r'/Users/zio/PycharmProjects/HomeLoanDefaultDetector/shapvaluedf.csv').drop('Unnamed: 0',axis=1)
+image1 = Image.open('shap_plot.png')
+shapdatadf = pd.read_csv(r'shapdatadf.csv').drop('Unnamed: 0',axis=1)
+shapvaluedf = pd.read_csv(r'shapvaluedf.csv').drop('Unnamed: 0',axis=1)
 
 
 placeholder4 = st.empty()
@@ -191,7 +191,7 @@ with placeholder4.container():
         st.write(fig)
 
 catmodel = CatBoostClassifier()
-catmodel.load_model("/Users/zio/PycharmProjects/HomeLoanDefaultDetector/default_detector_catboost")
+catmodel.load_model("default_detector_catboost")
 
 st.title('Make predictions in real time')
 outputdf = pd.DataFrame([outputdf], columns=features)
