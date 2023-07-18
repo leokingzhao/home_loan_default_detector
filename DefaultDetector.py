@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import joblib
+import PIL
 from PIL import Image
 # from streamlit_shap import st_shap
 import streamlit as st
