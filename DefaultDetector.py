@@ -64,7 +64,7 @@ features = ['EXT_SOURCE_2','EXT_SOURCE_3','DAYS_REGISTRATION','DAYS_LAST_PHONE_C
 outputdf = user_input_features()
 
 # understand the dataset
-df = pd.read_csv('/Users/zio/PycharmProjects/HomeLoanDefaultDetector/data_new.csv')
+df = pd.read_csv('data_new.csv')
 
 st.title('Dataset')
 if st.button('View some random data'):
