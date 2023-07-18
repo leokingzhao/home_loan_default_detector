@@ -1,6 +1,4 @@
-catboost==1.2
 Flask==2.2.5
-joblib==1.2.0
 matplotlib==3.6.3
 
 numpy==1.24.3
