@@ -171,7 +171,7 @@ shapvaluedf = pd.read_csv(r'shapvaluedf.csv').drop('Unnamed: 0',axis=1)
 catmodel = CatBoostClassifier()
 catmodel.load_model("default_detector_catboost")
 outputdf = pd.DataFrame([outputdf], columns=features)
-
+X_test = pd.read_csv(r'X_test.csv').drop('Unnamed: 0',axis=1)
 
 placeholder4 = st.empty()
 with placeholder4.container():
@@ -189,7 +189,7 @@ with placeholder4.container():
         
         # Plot the SHAP values
         
-        explanation = shap.Explanation(values=shap_values, data=outputdf, feature_names=features)
+        explanation = shap.Explanation(values=shap_values, data=X_test, feature_names=features)
         
         # Create the beeswarm plot using the Explanation object
         shap.plots.beeswarm(explanation)
