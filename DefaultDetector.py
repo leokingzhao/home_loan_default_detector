@@ -81,11 +81,11 @@ placeholder1 = st.empty()
 placeholder2 = st.empty()
 placeholder3 = st.empty()
 
-df2 = df[['TARGET', 'NAME_CONTRACT_TYPE']].value_counts().reset_index()
-df3 = df[['TARGET', 'CODE_GENDER']].value_counts().reset_index()
-df4 = df[['TARGET', 'FLAG_OWN_CAR']].value_counts().reset_index()
-df5 = df[['TARGET', 'NAME_INCOME_TYPE']].value_counts().reset_index()
-df6 = df[['TARGET', 'NAME_EDUCATION_TYPE']].value_counts().reset_index()
+df2 = df[['TARGET', 'NAME_CONTRACT_TYPE']]
+df3 = df[['TARGET', 'CODE_GENDER']]
+df4 = df[['TARGET', 'FLAG_OWN_CAR']]
+df5 = df[['TARGET', 'NAME_INCOME_TYPE']]
+df6 = df[['TARGET', 'NAME_EDUCATION_TYPE']]
 
 
 with placeholder1.container():
@@ -132,13 +132,13 @@ with placeholder2.container():
 
     with f2:
         plt.figure(figsize=(8, 6))
-        sns.barplot(data=df2, x='TARGET', y='NAME_CONTRACT_TYPE', hue='TARGET', palette='viridis')
+        sns.countplot(data=df2, x='NAME_CONTRACT_TYPE', hue='TARGET', palette='viridis')
         plt.title('CONTRACT_TYPE')
         st.pyplot(use_container_width=True)
 
     with f3:
         plt.figure(figsize=(8, 6))
-        sns.barplot(data=df3, x='TARGET', y='CODE_GENDER', hue='TARGET', palette='viridis')
+        sns.countplot(data=df3, x='CODE_GENDER', hue='TARGET', palette='viridis')
         plt.title('GENDER')
         st.pyplot(use_container_width=True)
 
@@ -147,19 +147,19 @@ with placeholder3.container():
 
     with f1:
         plt.figure(figsize=(8, 6))
-        sns.barplot(data=df4, x='TARGET', y='FLAG_OWN_CAR', hue='TARGET', palette='viridis')
+        sns.countplot(data=df4, x='FLAG_OWN_CAR', hue='TARGET', palette='viridis')
         plt.title('OWN_CAR')
         st.pyplot(use_container_width=True)
 
     with f2:
         plt.figure(figsize=(8, 6))
-        sns.barplot(data=df5, x='TARGET', y='NAME_INCOME_TYPE', hue='TARGET', palette='viridis')
+        sns.countplot(data=df5, x='NAME_INCOME_TYPE', hue='TARGET', palette='viridis')
         plt.title('INCOME_TYPE')
         st.pyplot(use_container_width=True)
 
     with f3:
         plt.figure(figsize=(8, 6))
-        sns.barplot(data=df6, x='TARGET', y='NAME_EDUCATION_TYPE', hue='TARGET', palette='viridis')
+        sns.countplot(data=df6, x='NAME_EDUCATION_TYPE', hue='TARGET', palette='viridis')
         plt.title('EDUCATION_TYPE')
         st.pyplot(use_container_width=True)
 
