@@ -165,6 +165,9 @@ st.title('SHAP Value')
 image1 = Image.open('shap_plot.png')
 shapdatadf = pd.read_csv(r'shapdatadf.csv').drop('Unnamed: 0',axis=1)
 shapvaluedf = pd.read_csv(r'shapvaluedf.csv').drop('Unnamed: 0',axis=1)
+catmodel = CatBoostClassifier()
+catmodel.load_model("default_detector_catboost")
+outputdf = pd.DataFrame([outputdf], columns=features)
 
 
 placeholder4 = st.empty()
@@ -178,12 +181,12 @@ with placeholder4.container():
         st.write(' ')
         st.write(' ')
         st.write(' ')
-        explainer = shap.Explainer(cat_model)
+        explainer = shap.Explainer(catmodel)
         shap_values = explainer(outputdf)
         
         # Plot the SHAP values
         
-        explanation = shap.Explanation(values=shap_values, data=X_test, feature_names=X.columns)
+        explanation = shap.Explanation(values=shap_values, data=outputdf, feature_names=X.columns)
         
         # Create the beeswarm plot using the Explanation object
         shap.plots.beeswarm(explanation)
@@ -201,11 +204,10 @@ with placeholder4.container():
                          labels={'x': 'Original value', 'y': 'shap value'})
         st.write(fig)
 
-catmodel = CatBoostClassifier()
-catmodel.load_model("default_detector_catboost")
+
 
 st.title('Make predictions in real time')
-outputdf = pd.DataFrame([outputdf], columns=features)
+
 
 # st.write('User input parameters below ⬇️')
 # st.write(outputdf)
