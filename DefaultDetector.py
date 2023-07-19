@@ -132,13 +132,13 @@ with placeholder2.container():
 
     with f2:
         plt.figure(figsize=(8, 6))
-        sns.barplot(data=df2, x='TARGET', y='NAME_CONTRACT_TYPE', hue='NAME_CONTRACT_TYPE', palette='viridis')
+        sns.barplot(data=df2, x='TARGET', y='NAME_CONTRACT_TYPE', hue='TARGET', palette='viridis')
         plt.title('CONTRACT_TYPE')
         st.pyplot(use_container_width=True)
 
     with f3:
         plt.figure(figsize=(8, 6))
-        sns.barplot(data=df3, x='TARGET', y='CODE_GENDER', hue='CODE_GENDER', palette='viridis')
+        sns.barplot(data=df3, x='TARGET', y='CODE_GENDER', hue='TARGET', palette='viridis')
         plt.title('GENDER')
         st.pyplot(use_container_width=True)
 
@@ -147,19 +147,19 @@ with placeholder3.container():
 
     with f1:
         plt.figure(figsize=(8, 6))
-        sns.barplot(data=df4, x='TARGET', y='FLAG_OWN_CAR', hue='FLAG_OWN_CAR', palette='viridis')
+        sns.barplot(data=df4, x='TARGET', y='FLAG_OWN_CAR', hue='TARGET', palette='viridis')
         plt.title('OWN_CAR')
         st.pyplot(use_container_width=True)
 
     with f2:
         plt.figure(figsize=(8, 6))
-        sns.barplot(data=df5, x='TARGET', y='NAME_INCOME_TYPE', hue='NAME_INCOME_TYPE', palette='viridis')
+        sns.barplot(data=df5, x='TARGET', y='NAME_INCOME_TYPE', hue='TARGET', palette='viridis')
         plt.title('INCOME_TYPE')
         st.pyplot(use_container_width=True)
 
     with f3:
         plt.figure(figsize=(8, 6))
-        sns.barplot(data=df6, x='TARGET', y='NAME_EDUCATION_TYPE', hue='NAME_EDUCATION_TYPE', palette='viridis')
+        sns.barplot(data=df6, x='TARGET', y='NAME_EDUCATION_TYPE', hue='TARGET', palette='viridis')
         plt.title('EDUCATION_TYPE')
         st.pyplot(use_container_width=True)
 
