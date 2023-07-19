@@ -178,7 +178,18 @@ with placeholder4.container():
         st.write(' ')
         st.write(' ')
         st.write(' ')
-        st.image(image1)
+        explainer = shap.Explainer(catmodel)
+        shap_values = explainer(outputdf)
+        
+        # Plot the SHAP values
+        
+        explanation = shap.Explanation(values=shap_values, data=X_test, feature_names=X.columns)
+        
+        # Create the beeswarm plot using the Explanation object
+        shap.plots.beeswarm(explanation)
+
+
+    
     with f2:
         st.subheader('Dependence plot for features')
         cf = st.selectbox("Choose a feature", (shapvaluedf.columns))
@@ -211,13 +222,11 @@ with placeholder5.container():
         st.write(outputdf)
         st.write(f'Predicted class: {p1}')
         st.write('Predicted cla和ss Probability')
-        st.write('0️⃣ means its a real transaction, 1️⃣ means its a Default transaction')
+        st.write('0️⃣ means its a Good Loan, 1️⃣ means its a Default Loan')
         st.write(p2)
     with f2:
-        explainer = shap.Explainer(catmodel)
-        shap_values = explainer(outputdf)
-
+        
         # st_shap(shap.plots.waterfall(shap_values[0]),  height=500, width=1700)
         st.set_option('deprecation.showPyplotGlobalUse', False)
         shap.plots.waterfall(shap_values[0])
-        st.pyplot(bbox_inches='tight')
+        st.pyplot()
