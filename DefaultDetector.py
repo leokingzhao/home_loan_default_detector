@@ -185,7 +185,7 @@ with placeholder4.container():
         st.write(' ')
         st.write(' ')
         explainer = shap.Explainer(catmodel)
-        shap_values = explainer(outputdf)
+        shap_values = explainer(X_test)
         
         # Plot the SHAP values
         
