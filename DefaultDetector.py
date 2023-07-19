@@ -162,7 +162,7 @@ df6 = df[['TARGET', 'NAME_EDUCATION_TYPE']].value_counts().reset_index()
 #         st.write(fig)
 
 st.title('SHAP Value')
-image1 = Image.open('shap_plot.png')
+#image1 = Image.open('shap_plot.png')
 shapdatadf = pd.read_csv(r'shapdatadf.csv').drop('Unnamed: 0',axis=1)
 shapvaluedf = pd.read_csv(r'shapvaluedf.csv').drop('Unnamed: 0',axis=1)
 catmodel = CatBoostClassifier()
@@ -186,7 +186,7 @@ with placeholder4.container():
         
         # Plot the SHAP values
         
-        explanation = shap.Explanation(values=shap_values, data=outputdf, feature_names=X.columns)
+        explanation = shap.Explanation(values=shap_values, data=outputdf, feature_names=features)
         
         # Create the beeswarm plot using the Explanation object
         shap.plots.beeswarm(explanation)
