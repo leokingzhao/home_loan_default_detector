@@ -20,6 +20,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder, OrdinalEncoder
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
 plt.style.use('default')
