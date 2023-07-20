@@ -26,7 +26,7 @@ plt.style.use('default')
 
 st.set_page_config(
     page_title='Real-Time Fraud Detection',
-    page_icon='🕵️‍♀️',
+    page_icon='👁️',
     layout='wide'
 )
 
@@ -39,7 +39,7 @@ st.markdown("<h1 style='text-align: center; color: black;'>Real-Time Default Det
 def user_input_features():
 
     st.sidebar.header('Make a prediction')
-    st.sidebar.write('User input parameters below ⬇️')
+    st.sidebar.write('User input parameters below ⇣')
 
 
     feature1 = st.sidebar.slider('EXT_SOURCE_2', 0.000000001, 1.0, 0.5)
