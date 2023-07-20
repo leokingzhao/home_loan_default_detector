@@ -92,43 +92,42 @@ with placeholder1.container():
     f1, f2, f3, = st.columns(3)
 
     with f1:
-        plt.figure(figsize=(8, 6))
-        sns.histplot(df[df['TARGET'] == 1]['EXT_SOURCE_2'], label='Default', kde=True)
-        sns.histplot(df[df['TARGET'] == 0]['EXT_SOURCE_2'], label='Real', kde=True)
-        plt.xlabel('EXT_SOURCE_2')
-        plt.title('EXT_SOURCE_2')
-        plt.legend()
-        st.pyplot(use_container_width=True)
+        fig, ax = plt.subplots(figsize=(8, 6))
+        sns.histplot(df[df['TARGET'] == 1]['EXT_SOURCE_2'], label='Default', kde=True, ax=ax)
+        sns.histplot(df[df['TARGET'] == 0]['EXT_SOURCE_2'], label='Real', kde=True, ax=ax)
+        ax.set_xlabel('EXT_SOURCE_2')
+        ax.set_title('EXT_SOURCE_2')
+        ax.legend()
+        st.pyplot(fig, use_container_width=True)
 
     with f2:
-        plt.figure(figsize=(8, 6))
-        sns.histplot(df[df['TARGET'] == 1]['EXT_SOURCE_3'], label='Default', kde=True)
-        sns.histplot(df[df['TARGET'] == 0]['EXT_SOURCE_3'], label='Real', kde=True)
-        plt.xlabel('EXT_SOURCE_3')
-        plt.title('EXT_SOURCE_3')
-        plt.legend()
-        st.pyplot(use_container_width=True)
+        fig, ax = plt.subplots(figsize=(8, 6))
+        sns.histplot(df[df['TARGET'] == 1]['EXT_SOURCE_3'], label='Default', kde=True, ax=ax)
+        sns.histplot(df[df['TARGET'] == 0]['EXT_SOURCE_3'], label='Real', kde=True, ax=ax)
+        ax.set_xlabel('EXT_SOURCE_3')
+        ax.set_title('EXT_SOURCE_3')
+        ax.legend()
+        st.pyplot(fig, use_container_width=True)
 
     with f3:
-        plt.figure(figsize=(8, 6))
-        sns.histplot(df[df['TARGET'] == 1]['DAYS_REGISTRATION'], label='Default', kde=True)
-        sns.histplot(df[df['TARGET'] == 0]['DAYS_REGISTRATION'], label='Real', kde=True)
-        plt.xlabel('DAYS_REGISTRATION')
-        plt.title('DAYS_REGISTRATION')
-        plt.legend()
-        st.pyplot(use_container_width=True)
-
+        fig, ax = plt.subplots(figsize=(8, 6))
+        sns.histplot(df[df['TARGET'] == 1]['DAYS_REGISTRATION'], label='Default', kde=True, ax=ax)
+        sns.histplot(df[df['TARGET'] == 0]['DAYS_REGISTRATION'], label='Real', kde=True, ax=ax)
+        ax.set_xlabel('DAYS_REGISTRATION')
+        ax.set_title('DAYS_REGISTRATION')
+        ax.legend()
+        st.pyplot(fig, use_container_width=True)
 with placeholder2.container():
     f1, f2, f3 = st.columns(3)
 
     with f1:
-        plt.figure(figsize=(8, 6))
-        sns.histplot(df[df['TARGET'] == 1]['DAYS_LAST_PHONE_CHANGE'], label='Default', kde=True)
-        sns.histplot(df[df['TARGET'] == 0]['DAYS_LAST_PHONE_CHANGE'], label='Real', kde=True)
-        plt.xlabel('DAYS_LAST_PHONE_CHANGE')
-        plt.title('DAYS_LAST_PHONE_CHANGE')
-        plt.legend()
-        st.pyplot(use_container_width=True)
+        fig, ax = plt.subplots(figsize=(8, 6))
+        sns.histplot(df[df['TARGET'] == 1]['DAYS_LAST_PHONE_CHANGE'], label='Default', kde=True, ax=ax)
+        sns.histplot(df[df['TARGET'] == 0]['DAYS_LAST_PHONE_CHANGE'], label='Real', kde=True, ax=ax)
+        ax.set_xlabel('DAYS_LAST_PHONE_CHANGE')
+        ax.set_title('DAYS_LAST_PHONE_CHANGE')
+        ax.legend()
+        st.pyplot(fig, use_container_width=True)
 
     with f2:
         plt.figure(figsize=(8, 6))
@@ -192,8 +191,11 @@ with placeholder4.container():
         explanation = shap.Explanation(values=shap_values, data=X_test, feature_names=features)
         
         # Create the beeswarm plot using the Explanation object
-        shap.plots.beeswarm(explanation)
-        st.pyplot()
+        fig, ax = plt.subplots()
+        shap.plots.beeswarm(explanation, show=False)  # Set show=False to prevent displaying the plot immediately
+        plt.xlabel('SHAP Value')
+        st.pyplot(fig)  # Pass the figure to st.pyplot() for rendering
+
 
     
     with f2:
@@ -226,12 +228,17 @@ with placeholder5.container():
         st.write('User input parameters below ⬇️')
         st.write(outputdf)
         st.write(f'Predicted class: {p1}')
-        st.write('Predicted cla和ss Probability')
-        st.write('0️⃣ means its a Good Loan, 1️⃣ means its a Default Loan')
+        st.write('Predicted class Probability')
+        st.write('0️⃣ means it\'s a Good Loan, 1️⃣ means it\'s a Default Loan')
         st.write(p2)
+
+        # Use HTML/CSS to make the table larger and display font in bold
+        st.markdown("<style>table { font-size: 20px; font-weight: bold; }</style>", unsafe_allow_html=True)
+        st.write('')  # Add an empty line to separate the table from other content
+        st.write('')  # Add another empty line to create spacing
     with f2:
-        
-        # st_shap(shap.plots.waterfall(shap_values[0]),  height=500, width=1700)
-        st.set_option('deprecation.showPyplotGlobalUse', False)
-        shap.plots.waterfall(shap_values[0])
-        st.pyplot()
+        # Plot the SHAP values using Matplotlib
+        fig, ax = plt.subplots()
+        shap.plots.waterfall(shap_values[0], show=False)  # Set show=False to prevent displaying the plot immediately
+        st.pyplot(fig)  # Pass the figure to st.pyplot() for rendering
+
