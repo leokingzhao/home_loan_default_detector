@@ -230,7 +230,32 @@ with placeholder5.container():
         st.write(f'Predicted class: {p1}')
         st.write('Predicted class Probability')
         st.write('0️⃣ means it\'s a Good Loan, 1️⃣ means it\'s a Default Loan')
-        st.write(p2)
+        # Add this CSS styling to make the table larger, bold the font, and highlight the content
+        highlight_style = """
+        <style>
+            table {
+                font-size: 20px;
+                font-weight: bold;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            th, td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+            tr:hover {
+                background-color: #f2f2f2;
+            }
+        </style>
+        """
+        st.write(highlight_style, unsafe_allow_html=True)
+        
+        # Display the predicted class probabilities as a table
+        st.write('Predicted class Probability')
+        st.write('0️⃣ means it\'s a Good Loan, 1️⃣ means it\'s a Default Loan')
+        st.table(p2)
+
 
         # Use HTML/CSS to make the table larger and display font in bold
         st.markdown("<style>table { font-size: 20px; font-weight: bold; }</style>", unsafe_allow_html=True)
