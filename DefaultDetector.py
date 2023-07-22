@@ -264,9 +264,6 @@ with placeholder5.container():
         st.write('')  # Add another empty line to create spacing
     with f2:
         
-        user_input_df = pd.DataFrame(outputdf, columns=features)
-
-        # 创建一个新的Explainer来计算用户输入特征值的SHAP值
         outputdf_flattened = np.array(outputdf).flatten()
         user_input_df = pd.DataFrame([outputdf_flattened], columns=features)
         
@@ -274,8 +271,11 @@ with placeholder5.container():
         user_input_explainer = shap.Explainer(catmodel)
         user_input_shap_values = user_input_explainer(user_input_df)
         
-        # Plot the SHAP values using Matplotlib
+        # 将 SHAP 值和模型输出的基准值取出来
+        shap_values_sample = user_input_shap_values[0]  # 取第一个样本的 SHAP 值
+        base_value = user_input_explainer.expected_value[0]  # 取模型输出的基准值
+        
+        # 使用 waterfall_plot 绘制 SHAP waterfall 图
         fig, ax = plt.subplots()
-        shap.plots.waterfall(user_input_shap_values, show=False)  # Set show=False to prevent displaying the plot immediately
+        shap.plots.waterfall(base_value, shap_values_sample, features=user_input_df.columns, show=False, ax=ax)
         st.pyplot(fig)  # Pass the figure to st.pyplot() for rendering
-
