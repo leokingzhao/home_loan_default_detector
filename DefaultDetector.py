@@ -264,6 +264,7 @@ with placeholder5.container():
         st.write('')  # Add another empty line to create spacing
     with f2:
         
+        # 使用 numpy 的 flatten() 方法对 outputdf 进行扁平化，使其变为形状为 (1, 9) 的二维数组
         outputdf_flattened = np.array(outputdf).flatten()
         user_input_df = pd.DataFrame([outputdf_flattened], columns=features)
         
@@ -272,10 +273,11 @@ with placeholder5.container():
         user_input_shap_values = user_input_explainer(user_input_df)
         
         # 将 SHAP 值和模型输出的基准值取出来
-        shap_values_sample = user_input_shap_values[0]  # 取第一个样本的 SHAP 值
+        shap_values_samples = user_input_shap_values.values[0]  # 取所有样本的 SHAP 值
         base_value = user_input_explainer.expected_value[0]  # 取模型输出的基准值
         
-        # 使用 waterfall_plot 绘制 SHAP waterfall 图
-        fig, ax = plt.subplots()
-        shap.plots.waterfall(base_value, shap_values_sample, features=user_input_df.columns, show=False, ax=ax)
-        st.pyplot(fig)  # Pass the figure to st.pyplot() for rendering
+        # 使用 waterfall_plot 绘制多个 SHAP waterfall 图，每个图对应一个样本
+        for i in range(len(shap_values_samples)):
+            fig, ax = plt.subplots()
+            shap.plots.waterfall(base_value, shap_values_samples[i], features=user_input_df.columns, show=False, ax=ax)
+            st.pyplot(fig)  # Pass the figure to st.pyplot() for rendering
