@@ -263,8 +263,9 @@ with placeholder5.container():
         st.write('')  # Add an empty line to separate the table from other content
         st.write('')  # Add another empty line to create spacing
     with f2:
+        shap_values_input = explainer(outputdf)
         
         # Plot the SHAP values using Matplotlib
         fig, ax = plt.subplots()
-        shap.plots.waterfall(shap_values[0], show=False)  # Set show=False to prevent displaying the plot immediately
+        shap.plots.waterfall(shap_values_input[0], show=False)  # Set show=False to prevent displaying the plot immediately
         st.pyplot(fig)  # Pass the figure to st.pyplot() for rendering
