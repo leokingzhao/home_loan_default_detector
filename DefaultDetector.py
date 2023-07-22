@@ -263,7 +263,8 @@ with placeholder5.container():
         st.write('')  # Add an empty line to separate the table from other content
         st.write('')  # Add another empty line to create spacing
     with f2:
-        user_input_df = pd.DataFrame([outputdf], columns=features)
+        
+        user_input_df = pd.DataFrame(outputdf, columns=features)
 
         # 创建一个新的Explainer来计算用户输入特征值的SHAP值
         outputdf_flattened = np.array(outputdf).flatten()
