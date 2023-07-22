@@ -263,8 +263,14 @@ with placeholder5.container():
         st.write('')  # Add an empty line to separate the table from other content
         st.write('')  # Add another empty line to create spacing
     with f2:
+        user_input_df = pd.DataFrame([outputdf], columns=features)
+
+        # 创建一个新的Explainer来计算用户输入特征值的SHAP值
+        user_input_explainer = shap.Explainer(catmodel)
+        user_input_shap_values = user_input_explainer(user_input_df)
+        
         # Plot the SHAP values using Matplotlib
         fig, ax = plt.subplots()
-        shap.plots.waterfall(shap_values[0], show=False)  # Set show=False to prevent displaying the plot immediately
+        shap.plots.waterfall(user_input_shap_values, show=False)  # Set show=False to prevent displaying the plot immediately
         st.pyplot(fig)  # Pass the figure to st.pyplot() for rendering
 
