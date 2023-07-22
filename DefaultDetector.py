@@ -224,7 +224,7 @@ p2 = catmodel.predict_proba(outputdf)
 
 placeholder5 = st.empty()
 with placeholder5.container():
-    f1, f2 = st.columns(2)
+    f1, f2 = st.columns(2,equal=True)
     with f1:
         st.write('User input parameters below ⬇️')
         st.write(outputdf)
