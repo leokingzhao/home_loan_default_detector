@@ -274,7 +274,19 @@ with placeholder5.container():
         # 将 SHAP 值取出来
         shap_values_sample = user_input_shap_values.values[0]  # 取第一个样本的 SHAP 值
         
-        # 使用 waterfall_plot 绘制 SHAP waterfall 图
+        # 获取特征名列表
+        feature_names = user_input_df.columns.tolist()
+        
+        # 计算每个特征对预测的贡献
+        contributions = np.sum(shap_values_sample)
+        
+        # 获取基准值
+        base_value = user_input_explainer.expected_value[0]
+        
+        # 绘制SHAP waterfall图
         fig, ax = plt.subplots()
-        shap.plots.waterfall(user_input_explainer.expected_value, shap_values_sample, features=user_input_df.columns, show=False, ax=ax)
+        ax.barh(feature_names, contributions)
+        ax.axvline(x=base_value, color='red', linestyle='--')
+        ax.set_xlabel('SHAP Value Contribution')
+        ax.set_title('SHAP Waterfall Plot')
         st.pyplot(fig)  # Pass the figure to st.pyplot() for rendering
