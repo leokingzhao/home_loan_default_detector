@@ -268,4 +268,5 @@ with placeholder5.container():
         # Plot the SHAP values using Matplotlib
         fig, ax = plt.subplots()
         shap.plots.waterfall(shap_values_input[0], show=False)  # Set show=False to prevent displaying the plot immediately
-        st.pyplot(fig)  # Pass the figure to st.pyplot() for rendering
+        st.pyplot(fig, clear_figure=True, bbox_inches='tight', format='png', dpi=600, height=600)  # Adjust the height (e.g., height=600)
+
