@@ -266,6 +266,10 @@ with placeholder5.container():
         user_input_df = pd.DataFrame([outputdf], columns=features)
 
         # 创建一个新的Explainer来计算用户输入特征值的SHAP值
+        outputdf_flattened = np.array(outputdf).flatten()
+        user_input_df = pd.DataFrame([outputdf_flattened], columns=features)
+        
+        # 创建一个新的Explainer来计算用户输入特征值的SHAP值
         user_input_explainer = shap.Explainer(catmodel)
         user_input_shap_values = user_input_explainer(user_input_df)
         
