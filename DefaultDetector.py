@@ -72,7 +72,7 @@ if st.button('View some random data'):
     st.write(df.sample(5))
 
 st.write(
-    f'The dataset is trained on LinearRegression with totally length of: {len(df)}. 0️⃣ means its a real loan, 1️⃣ means its a default loan. data is unbalanced (not⚖️)')
+    f'The dataset is trained on Logistics Regression with totally length of: {len(df)}. 0️⃣ means its a Good loan, 1️⃣ means its a Default loan. data is unbalanced (not⚖️)')
 
 unbalancedf = pd.DataFrame(df.TARGET.value_counts())
 st.write(unbalancedf)
